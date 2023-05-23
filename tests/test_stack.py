@@ -5,12 +5,14 @@ from src.stack import Node, Stack
 
 class TestNodeStack(unittest.TestCase):
 
+
     def test_node(self):
         """Тест Node"""
         tests_node = Node(1, None)
         first_item = Node('data1', tests_node)
         self.assertEqual(first_item.data, 'data1')
         self.assertEqual(first_item.next_node, tests_node)
+
 
     def test_stack(self):
         """Тест Stack"""
