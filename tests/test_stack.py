@@ -3,19 +3,22 @@ import unittest
 from src.stack import Node, Stack
 
 
-class Teststack(unittest.TestCase):
+class TestNodeStack(unittest.TestCase):
 
     def test_node(self):
         """Тест Node"""
-        first = Node(5, None)
-        self.assertEqual(first.data, 5)
-        self.assertEqual(first.next_node, None)
+        tests_node = Node(1, None)
+        first_item = Node('data1', tests_node)
+        self.assertEqual(first_item.data, 'data1')
+        self.assertEqual(first_item.next_node, tests_node)
 
     def test_stack(self):
         """Тест Stack"""
-        second = Stack()
-        self.assertEqual(second.top, None)
-        second.push('data1')
-        self.assertEqual(isinstance(second.top, Node), True)
-        self.assertEqual(second.pop(), 'data1')
-        self.assertEqual(second.pop(), None)
+        stack = Stack()
+        self.assertEqual(stack.top, None)
+        stack.push('data1')
+        stack.push('data2')
+        self.assertEqual(isinstance(stack.top, Node), True)
+        self.assertEqual(stack.pop(), 'data2')
+        self.assertEqual(stack.pop(), 'data1')
+        self.assertEqual(stack.pop(), None)
