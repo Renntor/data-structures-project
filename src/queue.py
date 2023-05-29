@@ -35,7 +35,9 @@ class Queue:
             self.head.next_node = self.tail
             self.all_data += '\n' + self.tail.data
         else:
-            self.tail = Node(data, None)
+            tail = Node(data, None)
+            self.tail.next_node = tail
+            self.tail = tail
             self.all_data += '\n' + self.tail.data
 
 
