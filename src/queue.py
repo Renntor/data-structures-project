@@ -1,7 +1,7 @@
 class Node:
     """Класс для узла очереди"""
 
-    def __init__(self, data, next_node):
+    def __init__(self, data: str, next_node=None) -> None:
         """
         Конструктор класса Node
 
@@ -10,15 +10,28 @@ class Node:
         self.data = data
         self.next_node = next_node
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.data}',{self.next_node})"
+
+    def __str__(self):
+        return f"{self.data}"
+
 
 class Queue:
     """Класс для очереди"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Конструктор класса Queue"""
         self.all_data = ''
         self.head = None
         self.tail = None
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.head},{self.tail})"
+
+    def __str__(self):
+        """Магический метод для строкового представления объекта"""
+        return self.all_data
 
 
     def enqueue(self, data):
@@ -27,19 +40,15 @@ class Queue:
 
         :param data: данные, которые будут добавлены в очередь
         """
-        if self.all_data == '':
-            self.head = Node(data, None)
-            self.all_data += self.head.data
-        elif self.head.next_node == None:
-            self.tail = Node(data, None)
-            self.head.next_node = self.tail
-            self.all_data += '\n' + self.tail.data
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+            self.all_data = self.head.data
         else:
-            tail = Node(data, None)
-            self.tail.next_node = tail
-            self.tail = tail
+            self.tail.next_node = new_node
+            self.tail = new_node
             self.all_data += '\n' + self.tail.data
-
 
     def dequeue(self):
         """
@@ -47,9 +56,10 @@ class Queue:
 
         :return: данные удаленного элемента
         """
-        pass
-
-    def __str__(self):
-        """Магический метод для строкового представления объекта"""
-        return self.all_data
+        if self.head is None:
+            return None
+        else:
+            remote = self.head
+            self.head = self.head.next_node
+            return remote.data
 
