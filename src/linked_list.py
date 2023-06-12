@@ -28,7 +28,6 @@ class LinkedList:
         self.tail = node
 
 
-
     def __str__(self) -> str:
         """Вывод данных односвязного списка в строковом представлении"""
         node = self.head
@@ -42,3 +41,24 @@ class LinkedList:
 
         ll_string += 'None'
         return ll_string
+
+
+    def to_list(self):
+        '''Вывод списка данных из односвязного списка'''
+        node = self.head
+        ll_list = []
+        while node:
+            ll_list.append(node.data)
+            node = node.next_node
+        return ll_list
+
+
+    def get_data_by_id(self, id):
+        node = self.head
+        while node:
+            try:
+                if node.data['id'] == id:
+                    return node.data
+            except TypeError:
+                print('Данные не являются словарем или в словаре нет id.')
+            node = node.next_node
